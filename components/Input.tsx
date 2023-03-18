@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-const Input = ({ className, ...props }) => {
+const Input = ({ className, ...props }: any) => {
   return (
     <input
       className={clsx(

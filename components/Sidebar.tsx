@@ -1,7 +1,7 @@
 import Card from "./Card";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
-import SidebarLink from "./Sidebarlink";
+import SidebarLink from "./SidebarLink";
 
 const links = [
   { label: "Home", icon: "Grid", link: "/home" },
@@ -25,7 +25,7 @@ const Sidebar = () => {
         <Image src={logo} alt="Able logo" priority className="w-14" />
       </div>
       {links.map((link) => (
-        <SidebarLink link={link} />
+        <SidebarLink key={link.label} link={link} />
       ))}
     </Card>
   );

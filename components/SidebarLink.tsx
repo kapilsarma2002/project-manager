@@ -7,7 +7,7 @@ import clsx from "clsx";
 
 const icons = { Settings, User, Grid, Calendar}
 
-const SidebarLink = ({link}) => {
+const SidebarLink = ({link}: any) => {
   const pathname = usePathname()
   let isActive = false
 

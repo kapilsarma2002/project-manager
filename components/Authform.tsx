@@ -26,11 +26,11 @@ const signinContent = {
 
 const initial = {email: '', password:'', firstName: '', lastName: ''}
 
-const AuthForm = ({mode}) => {
+const AuthForm = ({mode}: any) => {
   const [formState, setFormState] = useState({...initial});
   const router = useRouter()
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     if(mode==='register') {
@@ -63,7 +63,7 @@ const AuthForm = ({mode}) => {
                   placeholder="First Name"
                   value={formState.firstName}
                   className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
-                  onChange={(e) =>
+                  onChange={(e: Event) =>
                     setFormState((s) => ({ ...s, firstName: e.target.value }))
                   }
                 />
@@ -75,7 +75,7 @@ const AuthForm = ({mode}) => {
                   placeholder="Last Name"
                   value={formState.lastName}
                   className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
-                  onChange={(e) =>
+                  onChange={(e: Event) =>
                     setFormState((s) => ({ ...s, lastName: e.target.value }))
                   }
                 />
@@ -90,7 +90,7 @@ const AuthForm = ({mode}) => {
               placeholder="Email"
               value={formState.email}
               className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
-              onChange={(e) =>
+              onChange={(e: Event) =>
                 setFormState((s) => ({ ...s, email: e.target.value }))
               }
             />
@@ -103,7 +103,7 @@ const AuthForm = ({mode}) => {
               type="password"
               placeholder="Password"
               className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
-              onChange={(e) =>
+              onChange={(e: Event) =>
                 setFormState((s) => ({ ...s, password: e.target.value }))
               }
             />
