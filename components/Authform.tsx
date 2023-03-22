@@ -38,7 +38,7 @@ const AuthForm = ({mode}: any) => {
     } else {
       await signin(formState)
     }
-
+    router.push('/home')
     setFormState(initial)
   }
 

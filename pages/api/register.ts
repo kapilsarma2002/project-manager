@@ -6,6 +6,7 @@ import { serialize } from "cookie";
 export default async function register(req: NextApiRequest, res: NextApiResponse) {
 
   if (req.method === "POST") {
+    console.log('in register')
     const user = await db.user.create({
       data: {
         email: req.body.email,
@@ -19,16 +20,16 @@ export default async function register(req: NextApiRequest, res: NextApiResponse
     res.setHeader(
       "Set-Cookie",
       serialize(
-        process.env.COOKIE_NAME as string, jwt, {
+        process.env.COOKIE_SECRET, jwt, {
         httpOnly: true,
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
       })
     );
     res.status(201);
-    res.end();
+    res.json({success: true, message: 'User registered'});
   } else {
     res.status(402);
-    res.end();
+    res.json({});
   }
 }

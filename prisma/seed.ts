@@ -1,12 +1,12 @@
-// import { hashPassword } from "@/lib/auth";
+import { hashPassword } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { TASK_STATUS } from "@prisma/client";
 
 const getRandomTaskStatus = () => {
   const statuses = [
-    TASK_STATUS.COMPLETED,
-    TASK_STATUS.NOT_STARTED,
-    TASK_STATUS.STARTED,
+    'COMPLETED',
+    'NOT_STARTED',
+    'STARTED',
   ];
   return statuses[Math.floor(Math.random() * statuses.length)];
 };
@@ -19,7 +19,7 @@ async function main() {
       email: "user@email.com",
       firstName: "User",
       lastName: "Person",
-      password: "password",
+      password: await hashPassword("password"),
       projects: {
         create: new Array(5).fill(1).map((_, i) => ({
           name: `Project ${i}`,
@@ -41,14 +41,14 @@ async function main() {
             ownerId: user.id,
             projectId: project.id,
             description: `Everything that describes Task ${i}`,
-            status: getRandomTaskStatus(),
+            status: getRandomTaskStatus() as any,
           };
         }),
       })
     )
   );
-
-  console.log({ user, tasks });
+  console.log('tasks are :')
+  console.log({ tasks });
 }
 main()
   .then(async () => {

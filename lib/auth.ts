@@ -20,7 +20,7 @@ export const createJWT = (user: any) => {
 
 export const validateJWT = async (jwt: string) => {
 
-  const { payload } = await jwtVerify(
+  const { payload } = await jwtVerify (
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
   );
@@ -30,7 +30,7 @@ export const validateJWT = async (jwt: string) => {
 
 export const getUserFromCookie = async (cookies) => {
   
-  const jwt = cookies.get(process.env.COOKIE_NAME);
+  const jwt = cookies.get(process.env.COOKIE_SECRET);
 
   const { id } = await validateJWT(jwt.value);
 

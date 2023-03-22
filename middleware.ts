@@ -22,10 +22,13 @@ export default async function middleware(req, res) {
     pathname.startsWith("/register") ||
     PUBLIC_FILE.test(pathname)
   ) {
+    console.log('in middleware')
     return NextResponse.next();
   }
 
-  const jwt = req.cookies.get(process.env.COOKIE_NAME);
+  const jwt = req.cookies.get(process.env.COOKIE_SECRET);
+  console.log('jwt is : ')
+  console.log(jwt)
 
   if (!jwt) {
     req.nextUrl.pathname = "/signin";
@@ -36,6 +39,7 @@ export default async function middleware(req, res) {
     await verifyJWT(jwt.value);
     return NextResponse.next();
   } catch (e) {
+    console.log('error is : ')
     console.error(e);
     req.nextUrl.pathname = "/signin";
     return NextResponse.redirect(req.nextUrl);

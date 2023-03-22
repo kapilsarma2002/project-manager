@@ -2,11 +2,10 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/lib/db";
 import { comparePasswords, createJWT } from "@/lib/auth";
 import { serialize } from "cookie";
+import { useRouter } from "next/router";
 
-export default async function signin(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
+export default async function signin( req: NextApiRequest, res: NextApiResponse ) {
+  console.log('in signin')
   if (req.method === "POST") {
     const user = await db.user.findUnique({
       where: {
@@ -27,20 +26,20 @@ export default async function signin(
       res.setHeader(
         "Set-Cookie",
         serialize(
-          process.env.COOKIE_NAME as string, jwt, {
+          process.env.COOKIE_SECRET, jwt, {
           httpOnly: true,
           path: "/",
           maxAge: 60 * 60 * 24 * 7,
         })
       );
       res.status(201);
-      res.end();
+      res.json({});
     } else {
       res.status(401);
       res.json({ error: "Invalid login" });
     }
   } else {
     res.status(402);
-    res.end();
+    res.json({});
   }
 }

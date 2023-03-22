@@ -1,14 +1,16 @@
 export const fetcher = async ({url, method, body, json = true}: any) => {
   const res = await fetch(url, {
-    method,
+    method: method,
     body: body && JSON.stringify(body),
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     }
   })
-
+  console.log('in api')
   if(!res.ok) {
+    console.log('res is not ok')
+    console.log(res)
     throw new Error('API Error!')
   }
 
@@ -20,9 +22,9 @@ export const fetcher = async ({url, method, body, json = true}: any) => {
 }
 
 export const register = (user: any) => {
-  return fetcher({url: '/api/register', method:'post', body: user, json: false})
+  return fetcher({url: '/api/register', method:'POST', body: user, json: false})
 }
 
 export const signin = (user: any) => {
-  return fetcher({url: '/api/signin', method:'post', body: user, json: false})
+  return fetcher({url: '/api/signin', method:'POST', body: user, json: false})
 }
